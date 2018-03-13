@@ -24,18 +24,18 @@ Things you may want to cover:
 * ...
 
 
-Instructions
+## Instructions
 
-bundle install
-rake db:seed
-rails server
-localhost:3000/index
+* bundle install
+* rake db:seed
+* rails server
+* localhost:3000/index
 
-Pages edited
+## Pages edited
 
-app/controllers/pages_controller.rb
-config/routes.rb
-app/views/home.html.erb
-app/assets/pages.scss
-db/migrate/20180311184223_create_strengths.rb
-db/seeds.rb
+* app/controllers/pages_controller.rb
+* config/routes.rb
+* app/views/home.html.erb
+* app/assets/pages.scss
+* db/migrate/20180311184223_create_strengths.rb
+* db/seeds.rb
