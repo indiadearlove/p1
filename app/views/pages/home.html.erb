@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		
+		<title>Panopy</title>
+
+		<!-- Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
+		
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+		<!-- Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet">
+		
+	</head>
+
+	<body>
+
+	  <div class="container">
+
+	  	<!-- Header -->
+	    <div class="section">
+	    	<div class="top">
+	    		<h1 class='title'>Endorse</h1>
+	    		<p class='percentage'>75% Complete</p>
+	    		<img src="" alt="">
+	    	</div>
+	    </div>
+
+      <!-- Progress Bar -->
+
+	    <div class="section">
+	    	<div class="progress">
+				  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+	    </div>
+
+      <!-- Main Body -->
+
+	    <div class="section">
+	    	<div class="body">
+	    		<h4 class="question">Which social strengths does <strong>India Dearlove</strong> display the most?</h4>
+	    		<div class="row">
+	    			<div class="col-6">
+	    				<h5 class="title">All Strengths</h5>
+			    		<ul class="choices list-inline row">
+				    		<% @strengths.each do |strength| %> 
+				    		  <div class="col-6 choice">
+										<li class="list-inline-item d-flex justify-content-between align-items-center">
+											<div class="strength-name">
+										    <%= strength.name %>
+										  </div>
+									    <button type="button" class="btn btn-primary info" data-toggle="modal" data-target="#<%= strength.name %>">
+									    	<span class="badge badge-pill">i</span>
+									    </button>
+									  </li>
+									</div>
+								<% end %>
+						  </ul>
+						</div>
+						<div class="col-6">
+							<h5 class="title">Top Strengths <span class="max">(Max 3)</span></h5>
+						  <ul class="new-choices list-inline row">
+				      </ul>
+				    </div>
+					</div>
+					<div class="submit">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submit">
+							Submit
+						</button>
+					</div>
+		    </div>
+	    </div>
+	  </div>
+
+	  <!-- Footer -->
+	  <!-- <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+	    <div class="collapse navbar-collapse" id="navbarCollapse">
+	      <ul class="navbar-nav mr-auto">
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Terms & Conditions</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Privacy Policy</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Panopy is the trading name for Panopy Limited (UK: #11092902).</a>
+	        </li>
+	      </ul>
+	    </div>
+	  </nav> -->
+
+	  <!-- Information pop up -->
+	  <% @strengths.each do |strength| %>
+		  <div class="modal fade" id="<%= strength.name %>" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="<%= strength.name %>"><%= strength.name %></h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <%= strength.description %>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		<% end %>
+
+
+		<!-- Submit pop up -->
+	  <div class="modal fade" id="submit" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="submit"></h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Thank you for submitting!
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(".new-choice").click(function() {
+					$(this).addClass('choice');
+	    		$(this).removeClass('new-choice');
+	    		$('.choices').prepend($(this));
+				});
+		    $(".choice").click(function() {
+		    	if (($(".new-choice").length) >= 3) {
+            $(".max").css("color", "red")
+		    	}
+		    	else {
+            $(this).addClass('new-choice');
+		    		$(this).removeClass('choice');
+		    		$('.new-choices').prepend($(this));
+		    		console.log($(".new-choices"))
+		    	}
+				});
+			});
+		</script>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	</body>
+</html>
