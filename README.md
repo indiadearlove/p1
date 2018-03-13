@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+Instructions
+
+bundle install
+rake db:seed
+rails server
+localhost:3000/index
